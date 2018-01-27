@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import wromaciej.moviesrental.movies.model.Movie;
 import wromaciej.moviesrental.movies.service.MovieService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value = "/movies")
 public class MoviesController {
@@ -22,6 +24,19 @@ public class MoviesController {
     @RequestMapping(value="/{movieId}")
     public @ResponseBody Movie findMovie(@PathVariable int movieId) {
         return movieService.findMovie(movieId);
+    }
+
+
+    @RequestMapping(value="/title/{title}")
+    public @ResponseBody
+    List<Movie> findMovieByTitle(@PathVariable String title) {
+        return movieService.findMoviesByTitle(title);
+    }
+
+
+    @RequestMapping(value="/")
+    public @ResponseBody List<Movie> findAllMovies() {
+        return movieService.findAllMovies();
     }
 
 }

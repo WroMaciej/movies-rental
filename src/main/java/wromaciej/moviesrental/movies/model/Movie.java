@@ -17,8 +17,17 @@ public class Movie {
     @Column(name = "title")
     private String title;
 
+    @Column(name = "rental_rate")
+    private Double rentalRate;
+
 
     public Movie() {
+    }
+
+    public Movie(Integer id, String title, Double rentalRate) {
+        this.id = id;
+        this.title = title;
+        this.rentalRate = rentalRate;
     }
 
     public Movie(Integer id, String title) {
@@ -40,5 +49,14 @@ public class Movie {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+
+    public Double getRentalRate() {
+        return rentalRate;
+    }
+
+    public void setRentalRate(Double rentalRate) {
+        this.rentalRate = rentalRate;
     }
 }
