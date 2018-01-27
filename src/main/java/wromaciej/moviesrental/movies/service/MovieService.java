@@ -2,21 +2,21 @@ package wromaciej.moviesrental.movies.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import wromaciej.moviesrental.movies.dao.MovieDao;
 import wromaciej.moviesrental.movies.model.Movie;
+import wromaciej.moviesrental.movies.repository.MovieRepository;
 
 @Service
 public class MovieService {
 
-    private final MovieDao movieDao;
+    private final MovieRepository movieRepository;
 
     @Autowired
-    public MovieService(MovieDao movieDao) {
-        this.movieDao = movieDao;
+    public MovieService(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
     }
 
     public Movie findMovie(int movieId) {
-        return movieDao.findMovie(movieId);
+        return movieRepository.findOne(movieId);
     }
 
 }
