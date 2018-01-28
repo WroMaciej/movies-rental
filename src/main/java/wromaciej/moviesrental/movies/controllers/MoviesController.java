@@ -9,7 +9,6 @@ import wromaciej.moviesrental.movies.model.Movie;
 import wromaciej.moviesrental.movies.service.MovieService;
 
 import java.util.List;
-//test comment
 
 @Controller
 @RequestMapping(value = "/movies")
@@ -25,6 +24,11 @@ public class MoviesController {
     @RequestMapping(value="/{movieId}")
     public @ResponseBody Movie findMovie(@PathVariable int movieId) {
         return movieService.findMovie(movieId);
+    }
+
+    @RequestMapping(value="/{movieId}/rental/{days}")
+    public @ResponseBody double findMovieRentalRateForDays(@PathVariable int movieId, @PathVariable int days) {
+        return movieService.findMovie(movieId).getRentalRate()*days;
     }
 
 
