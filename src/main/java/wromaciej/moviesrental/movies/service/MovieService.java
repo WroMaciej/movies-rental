@@ -27,9 +27,9 @@ public class MovieService {
         return movieRepository.findByTitle(title);
     }
 
-
     public List<Movie> findAllMovies() {
         return Lists.newArrayList(movieRepository.findAll());
     }
+
 
 }
