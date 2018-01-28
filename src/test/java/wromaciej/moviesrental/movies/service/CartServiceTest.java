@@ -11,6 +11,7 @@ import wromaciej.moviesrental.movies.model.Movie;
 import wromaciej.moviesrental.movies.repository.MovieRepository;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -18,9 +19,10 @@ import static org.junit.Assert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class CartServiceTest {
 
-    private MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
-    private MovieService movieService = new MovieService(movieRepository);
-    private CartService cartService = new CartService(movieRepository, movieService);
+    //private MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
+    //private MovieService movieService = new MovieService(movieRepository);
+    private MovieService movieService = Mockito.mock(MovieService.class);
+    private CartService cartService = new CartService(movieService);
 
     private Movie movie1 = new Movie(1, "Godfatther 1", 3.5);
 
@@ -41,7 +43,7 @@ public class CartServiceTest {
         // GIVEN
         ArrayList<Integer> movieIds = Lists.newArrayList(movie1.getId());
 
-        Mockito.when(movieRepository.findOne(movie1.getId())).thenReturn(movie1);
+        Mockito.when(movieService.findMovie(movie1.getId())).thenReturn(movie1);
 
         // WHEN
         double rentalRate = cartService.calculateRentalRate(movieIds);
@@ -55,7 +57,7 @@ public class CartServiceTest {
         // GIVEN
 
         int rentalDays=0;
-        Mockito.when(movieRepository.findOne(movie1.getId())).thenReturn(movie1);
+        Mockito.when(movieService.findMovie(movie1.getId())).thenReturn(movie1);
 
         // WHEN
         double rentalRateForDays = cartService.calculateRentalRateForDays(movie1.getId(),rentalDays);
@@ -69,7 +71,7 @@ public class CartServiceTest {
         // GIVEN
 
         int rentalDays=2;
-        Mockito.when(movieRepository.findOne(movie1.getId())).thenReturn(movie1);
+        Mockito.when(movieService.findMovie(movie1.getId())).thenReturn(movie1);
 
         // WHEN
         double rentalRateForDays = cartService.calculateRentalRateForDays(movie1.getId(),rentalDays);
@@ -83,12 +85,22 @@ public class CartServiceTest {
     public void shouldThrowExceptionForNegativeRentalDays() throws  IllegalArgumentException{
         // GIVEN
         int rentalDays=-1;
-        Mockito.when(movieRepository.findOne(movie1.getId())).thenReturn(movie1);
+        Mockito.when(movieService.findMovie(movie1.getId())).thenReturn(movie1);
         // WHEN
         exception.expect(IllegalArgumentException.class);
         //THEN
         cartService.calculateRentalRateForDays(movie1.getId(),rentalDays);
-
+    }
+    
+    @Rule public final ExpectedException exception2 = ExpectedException.none();
+    @Test
+    public void shouldThrowExceptionForIllegalMovie() throws  NoSuchElementException{
+        // GIVEN
+        int movieId=-1;
+        // WHEN
+        exception.expect(NoSuchElementException.class);
+        //THEN
+        cartService.calculateRentalRateForDays(movieId,1);
     }
 
 
