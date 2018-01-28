@@ -9,6 +9,7 @@ import wromaciej.moviesrental.movies.model.Movie;
 import wromaciej.moviesrental.movies.service.MovieService;
 
 import java.util.List;
+//test comment
 
 @Controller
 @RequestMapping(value = "/movies")
