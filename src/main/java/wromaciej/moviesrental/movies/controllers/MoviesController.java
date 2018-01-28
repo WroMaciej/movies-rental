@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import wromaciej.moviesrental.movies.model.Movie;
+import wromaciej.moviesrental.movies.service.CartService;
 import wromaciej.moviesrental.movies.service.MovieService;
 
 import java.util.List;
@@ -15,10 +16,12 @@ import java.util.List;
 public class MoviesController {
 
     private final MovieService movieService;
+    private final CartService cartService;
 
     @Autowired
-    public MoviesController(MovieService movieService) {
+    public MoviesController(MovieService movieService, CartService cartService) {
         this.movieService = movieService;
+        this.cartService = cartService;
     }
 
     @RequestMapping(value="/{movieId}")
@@ -28,7 +31,7 @@ public class MoviesController {
 
     @RequestMapping(value="/{movieId}/rental/{days}")
     public @ResponseBody double findMovieRentalRateForDays(@PathVariable int movieId, @PathVariable int days) {
-        return movieService.findMovie(movieId).getRentalRate()*days;
+        return cartService.calculateRentalRateForDays(movieId, days);
     }
 
 

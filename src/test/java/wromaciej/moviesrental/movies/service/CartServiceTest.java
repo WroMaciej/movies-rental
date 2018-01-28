@@ -48,6 +48,35 @@ public class CartServiceTest {
         assertThat(rentalRate, equalTo(3.5));
     }
 
+    @Test
+    public void shouldReturn0ForNoRentalDays(){
+        // GIVEN
+
+        int rentalDays=0;
+        Mockito.when(movieRepository.findOne(movie1.getId())).thenReturn(movie1);
+
+        // WHEN
+        double rentalRateForDays = cartService.calculateRentalRateForDays(movie1.getId(),rentalDays);
+
+        // THEN
+        assertThat(rentalRateForDays, equalTo(0.0));
+    }
+
+    @Test
+    public void shouldReturn7For2RentalDays(){
+        // GIVEN
+
+        int rentalDays=2;
+        Mockito.when(movieRepository.findOne(movie1.getId())).thenReturn(movie1);
+
+        // WHEN
+        double rentalRateForDays = cartService.calculateRentalRateForDays(movie1.getId(),rentalDays);
+
+        // THEN
+        assertThat(rentalRateForDays, equalTo(7.0));
+    }
+
+
 
 
 }

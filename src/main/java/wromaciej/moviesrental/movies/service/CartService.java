@@ -25,4 +25,10 @@ public class CartService  {
 
         return sum;
     }
+
+    public double calculateRentalRateForDays(int movieId, int rentalDays){
+        return movieRepository.findOne(movieId).getRentalRate()*rentalDays;
+    }
+
+
 }
