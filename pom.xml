@@ -33,6 +33,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
@@ -49,6 +50,21 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+
+		<!--<dependency>-->
+			<!--<groupId>com.googlecode.catch-exception</groupId>-->
+			<!--<artifactId>catch-exception</artifactId>-->
+			<!--<version>1.2.0</version>-->
+			<!--<scope>test</scope>-->
+		<!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.assertj</groupId>-->
+            <!--<artifactId>assertj-core</artifactId>-->
+            <!--<version>3.8.0</version>-->
+            <!--<scope>test</scope>-->
+        <!--</dependency>-->
+
 	</dependencies>
 
 	<build>

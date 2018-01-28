@@ -10,10 +10,12 @@ import java.util.Collection;
 @Service
 public class CartService  {
     private final MovieRepository movieRepository;
+    private final MovieService movieService;
 
     @Autowired
-    public CartService(MovieRepository movieRepository) {
+    public CartService(MovieRepository movieRepository, MovieService movieService) {
         this.movieRepository = movieRepository;
+        this.movieService = movieService;
     }
 
     public double calculateRentalRate(Collection<Integer> movieIds) {
@@ -22,12 +24,14 @@ public class CartService  {
             Movie movie = movieRepository.findOne(movieId);
             sum += movie.getRentalRate();
         }
-
         return sum;
     }
 
     public double calculateRentalRateForDays(int movieId, int rentalDays){
-        return movieRepository.findOne(movieId).getRentalRate()*rentalDays;
+        if (rentalDays>=0){
+            return movieService.findMovie(movieId).getRentalRate()*rentalDays;
+        } else throw new IllegalArgumentException("Rental duration is a negative number! Rental duration must be a positive number.");
+
     }
 
 
