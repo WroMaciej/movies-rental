@@ -1,5 +1,6 @@
 package wromaciej.moviesrental.movies.service;
 
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wromaciej.moviesrental.movies.model.Actor;
@@ -31,5 +32,9 @@ public class ActorService {
 
     public List<Actor> findActorByFullName(String firstName, String lastName) {
         return actorRepository.findByFirstNameAndLastName(firstName, lastName);
+    }
+
+    public List<Actor> findAllActors(){
+        return Lists.newArrayList(actorRepository.findAll());
     }
 }

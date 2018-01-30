@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import wromaciej.moviesrental.movies.model.Actor;
 import wromaciej.moviesrental.movies.service.ActorService;
 
+import java.util.List;
+
 @Controller
 @RequestMapping(value="/actor")
 public class ActorController {
@@ -19,10 +21,18 @@ public class ActorController {
         this.actorService = actorService;
     }
 
+    @RequestMapping(value="/")
+    public @ResponseBody
+    List<Actor> findAllActors(){
+        return actorService.findAllActors();
+    }
+
     @RequestMapping(value="/{actorId}")
     public @ResponseBody Actor findActor(@PathVariable int actorId){
         return actorService.findActor(actorId);
     }
+
+
 
 
 }

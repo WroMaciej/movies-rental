@@ -19,8 +19,6 @@ import static org.junit.Assert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class CartServiceTest {
 
-    //private MovieRepository movieRepository = Mockito.mock(MovieRepository.class);
-    //private MovieService movieService = new MovieService(movieRepository);
     private MovieService movieService = Mockito.mock(MovieService.class);
     private CartService cartService = new CartService(movieService);
 
