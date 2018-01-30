@@ -19,6 +19,8 @@ public class Actor {
     @Column(name = "last_name")
     private String lastName;
 
+    public Actor(){}
+
     public Actor(Integer actorId, String firstName, String lastName) {
         this.actorId = actorId;
         this.firstName = firstName;
