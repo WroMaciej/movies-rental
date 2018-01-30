@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import wromaciej.moviesrental.movies.model.Actor;
+import wromaciej.moviesrental.movies.model.Movie;
 import wromaciej.moviesrental.movies.service.ActorService;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -30,6 +32,11 @@ public class ActorController {
     @RequestMapping(value="/{actorId}")
     public @ResponseBody Actor findActor(@PathVariable int actorId){
         return actorService.findActor(actorId);
+    }
+
+    @RequestMapping(value="/{actorId}/movies")
+    public @ResponseBody Collection<Movie> findMoviesWithActor(@PathVariable int actorId){
+        return actorService.findActor(actorId).movies;
     }
 
 
