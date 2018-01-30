@@ -36,7 +36,7 @@ public class ActorController {
 
     @RequestMapping(value="/{actorId}/movies")
     public @ResponseBody Collection<Movie> findMoviesWithActor(@PathVariable int actorId){
-        return actorService.findActor(actorId).movies;
+        return actorService.findActor(actorId).getMovies();
     }
 
 

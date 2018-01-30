@@ -1,5 +1,7 @@
 package wromaciej.moviesrental.movies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -20,8 +22,16 @@ public class Movie {
     private Double rentalRate;
 
     @ManyToMany(mappedBy = "movies")
-    public Collection<Actor> actors = new ArrayList<Actor>();
+    private Collection<Actor> actors = new ArrayList<Actor>();
 
+    @JsonIgnore
+    public Collection<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Collection<Actor> actors) {
+        this.actors = actors;
+    }
 
     public Movie() {
     }

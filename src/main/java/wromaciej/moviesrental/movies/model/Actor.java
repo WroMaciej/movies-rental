@@ -1,9 +1,10 @@
 package wromaciej.moviesrental.movies.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "actor", schema = "public")
@@ -11,7 +12,7 @@ public class Actor {
 
     @Id
     @Column(name = "actor_id")
-    private Integer actorId;
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -25,24 +26,32 @@ public class Actor {
             joinColumns = {@JoinColumn(name = "actor_id")},
             inverseJoinColumns = {@JoinColumn(name = "film_id")}
     )
-    public Collection<Movie> movies = new ArrayList<Movie>();
+    private Collection<Movie> movies = new ArrayList<Movie>();
 
+    @JsonIgnore
+    public Collection<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Collection<Movie> movies) {
+        this.movies = movies;
+    }
 
     public Actor() {
     }
 
     public Actor(Integer actorId, String firstName, String lastName) {
-        this.actorId = actorId;
+        this.id = actorId;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public Integer getId() {
-        return actorId;
+        return id;
     }
 
     public void setId(Integer actorId) {
-        this.actorId = actorId;
+        this.id = actorId;
     }
 
     public String getFirstName() {
