@@ -1,9 +1,8 @@
 package wromaciej.moviesrental.movies.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "film", schema = "public")
@@ -19,6 +18,9 @@ public class Movie {
 
     @Column(name = "rental_rate")
     private Double rentalRate;
+
+    @ManyToMany(mappedBy = "movies")
+    public Collection<Actor> actors = new ArrayList<Actor>();
 
 
     public Movie() {

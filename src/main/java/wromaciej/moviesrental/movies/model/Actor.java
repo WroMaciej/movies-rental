@@ -1,9 +1,9 @@
 package wromaciej.moviesrental.movies.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "actor", schema = "public")
@@ -19,7 +19,17 @@ public class Actor {
     @Column(name = "last_name")
     private String lastName;
 
-    public Actor(){}
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = {@JoinColumn(name = "actor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "film_id")}
+    )
+    public Collection<Movie> movies = new ArrayList<Movie>();
+
+
+    public Actor() {
+    }
 
     public Actor(Integer actorId, String firstName, String lastName) {
         this.actorId = actorId;
