@@ -11,7 +11,7 @@ public class Actor {
 
     @Id
     @Column(name = "actor_id")
-    private Integer id;
+    private Integer actorId;
 
     @Column(name = "first_name")
     private String firstName;
@@ -19,18 +19,18 @@ public class Actor {
     @Column(name = "last_name")
     private String lastName;
 
-    public Actor(Integer id, String firstName, String lastName) {
-        this.id = id;
+    public Actor(Integer actorId, String firstName, String lastName) {
+        this.actorId = actorId;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public Integer getId() {
-        return id;
+        return actorId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer actorId) {
+        this.actorId = actorId;
     }
 
     public String getFirstName() {
