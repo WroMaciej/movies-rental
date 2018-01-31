@@ -10,7 +10,6 @@ import java.util.Collection;
 @Table(name = "film", schema = "public")
 public class Movie {
 
-
     @Id
     @Column(name = "film_id")
     private Integer id;
@@ -22,7 +21,7 @@ public class Movie {
     private Double rentalRate;
 
     @ManyToMany(mappedBy = "movies")
-    private Collection<Actor> actors = new ArrayList<Actor>();
+    private Collection<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
@@ -36,15 +35,6 @@ public class Movie {
     public Movie(Integer id, String title) {
         this.id = id;
         this.title = title;
-    }
-
-    @JsonIgnore
-    public Collection<Actor> getActors() {
-        return actors;
-    }
-
-    public void setActors(Collection<Actor> actors) {
-        this.actors = actors;
     }
 
     public Integer getId() {
@@ -70,5 +60,14 @@ public class Movie {
 
     public void setRentalRate(Double rentalRate) {
         this.rentalRate = rentalRate;
+    }
+
+    @JsonIgnore
+    public Collection<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Collection<Actor> actors) {
+        this.actors = actors;
     }
 }

@@ -20,13 +20,13 @@ public class Actor {
     @Column(name = "last_name")
     private String lastName;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(
             name = "film_actor",
             joinColumns = {@JoinColumn(name = "actor_id")},
             inverseJoinColumns = {@JoinColumn(name = "film_id")}
     )
-    private Collection<Movie> movies = new ArrayList<Movie>();
+    private Collection<Movie> movies = new ArrayList<>();
 
     public Actor() {
     }
@@ -35,15 +35,6 @@ public class Actor {
         this.id = actorId;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    @JsonIgnore
-    public Collection<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Collection<Movie> movies) {
-        this.movies = movies;
     }
 
     public Integer getId() {
@@ -68,5 +59,14 @@ public class Actor {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @JsonIgnore
+    public Collection<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Collection<Movie> movies) {
+        this.movies = movies;
     }
 }
