@@ -28,15 +28,6 @@ public class Actor {
     )
     private Collection<Movie> movies = new ArrayList<Movie>();
 
-    @JsonIgnore
-    public Collection<Movie> getMovies() {
-        return movies;
-    }
-
-    public void setMovies(Collection<Movie> movies) {
-        this.movies = movies;
-    }
-
     public Actor() {
     }
 
@@ -44,6 +35,15 @@ public class Actor {
         this.id = actorId;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    @JsonIgnore
+    public Collection<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Collection<Movie> movies) {
+        this.movies = movies;
     }
 
     public Integer getId() {

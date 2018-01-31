@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Controller
-@RequestMapping(value="/actor")
+@RequestMapping(value = "/actor")
 public class ActorController {
 
     private final ActorService actorService;
@@ -23,23 +23,23 @@ public class ActorController {
         this.actorService = actorService;
     }
 
-    @RequestMapping(value="/")
+    @RequestMapping(value = "/")
     public @ResponseBody
-    List<Actor> findAllActors(){
+    List<Actor> findAllActors() {
         return actorService.findAllActors();
     }
 
-    @RequestMapping(value="/{actorId}")
-    public @ResponseBody Actor findActor(@PathVariable int actorId){
+    @RequestMapping(value = "/{actorId}")
+    public @ResponseBody
+    Actor findActor(@PathVariable int actorId) {
         return actorService.findActor(actorId);
     }
 
-    @RequestMapping(value="/{actorId}/movies")
-    public @ResponseBody Collection<Movie> findMoviesWithActor(@PathVariable int actorId){
+    @RequestMapping(value = "/{actorId}/movies")
+    public @ResponseBody
+    Collection<Movie> findMoviesWithActor(@PathVariable int actorId) {
         return actorService.findActor(actorId).getMovies();
     }
-
-
 
 
 }
