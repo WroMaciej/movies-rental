@@ -5,10 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import wromaciej.moviesrental.movies.model.Actor;
 import wromaciej.moviesrental.movies.model.Movie;
+import wromaciej.moviesrental.movies.service.ActorService;
 import wromaciej.moviesrental.movies.service.CartService;
 import wromaciej.moviesrental.movies.service.MovieService;
 
+import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -32,6 +35,11 @@ public class MoviesController {
     @RequestMapping(value="/{movieId}/rental/{days}")
     public @ResponseBody double findMovieRentalRateForDays(@PathVariable int movieId, @PathVariable int days) {
         return cartService.calculateRentalRateForDays(movieId, days);
+    }
+
+    @RequestMapping(value="/{movieId}/actors")
+    public @ResponseBody Collection<Actor> findActorsWithMovie(@PathVariable int movieId) {
+        return movieService.findMovie(movieId).getActors();
     }
 
 

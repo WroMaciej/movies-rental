@@ -1,14 +1,14 @@
 package wromaciej.moviesrental.movies.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "film", schema = "public")
 public class Movie {
-
 
     @Id
     @Column(name = "film_id")
@@ -20,6 +20,8 @@ public class Movie {
     @Column(name = "rental_rate")
     private Double rentalRate;
 
+    @ManyToMany(mappedBy = "movies")
+    private Collection<Actor> actors = new ArrayList<>();
 
     public Movie() {
     }
@@ -58,5 +60,14 @@ public class Movie {
 
     public void setRentalRate(Double rentalRate) {
         this.rentalRate = rentalRate;
+    }
+
+    @JsonIgnore
+    public Collection<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Collection<Actor> actors) {
+        this.actors = actors;
     }
 }

@@ -1,9 +1,10 @@
 package wromaciej.moviesrental.movies.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table(name = "actor", schema = "public")
@@ -11,7 +12,7 @@ public class Actor {
 
     @Id
     @Column(name = "actor_id")
-    private Integer actorId;
+    private Integer id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -19,20 +20,29 @@ public class Actor {
     @Column(name = "last_name")
     private String lastName;
 
-    public Actor(){}
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = {@JoinColumn(name = "actor_id")},
+            inverseJoinColumns = {@JoinColumn(name = "film_id")}
+    )
+    private Collection<Movie> movies = new ArrayList<>();
+
+    public Actor() {
+    }
 
     public Actor(Integer actorId, String firstName, String lastName) {
-        this.actorId = actorId;
+        this.id = actorId;
         this.firstName = firstName;
         this.lastName = lastName;
     }
 
     public Integer getId() {
-        return actorId;
+        return id;
     }
 
     public void setId(Integer actorId) {
-        this.actorId = actorId;
+        this.id = actorId;
     }
 
     public String getFirstName() {
@@ -49,5 +59,14 @@ public class Actor {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @JsonIgnore
+    public Collection<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Collection<Movie> movies) {
+        this.movies = movies;
     }
 }
