@@ -37,4 +37,8 @@ public class ActorService {
     public List<Actor> findAllActors(){
         return Lists.newArrayList(actorRepository.findAll());
     }
+
+    public List<Actor> findActorsWithLastName(String lastName) {
+        return actorRepository.findByLastName(lastName);
+    }
 }
