@@ -46,7 +46,7 @@ public class ActorController {
     @RequestMapping(value = "/last_name/{lastName}")
     public @ResponseBody
     List<Actor> findActorsWithLastName(@PathVariable String lastName){
-        return actorService.findActorsWithLastName(lastName);
+        return actorService.findActorByLastName(lastName);
     };
 
 
