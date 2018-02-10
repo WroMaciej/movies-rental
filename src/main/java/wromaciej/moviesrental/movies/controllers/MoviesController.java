@@ -62,7 +62,7 @@ public class MoviesController {
     }
 
 
-    @RequestMapping(value = "/movie/{movieId}.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/movie/{movieId}.html")
     public @ResponseBody
     String showMovieInfo(@PathVariable int movieId, ModelMap model) {
         model.put("title",movieService.findMovie(movieId).getTitle());

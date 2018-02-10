@@ -43,6 +43,14 @@ public class Movie {
 
     }
 
+    public Movie(Integer id, String title, Double rentalRate, String description, Collection<Actor> actors) {
+        this.id = id;
+        this.title = title;
+        this.rentalRate = rentalRate;
+        this.description = description;
+        this.actors = actors;
+    }
+
     public Integer getId() {
         return id;
     }
