@@ -7,13 +7,8 @@ import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @SpringBootApplication
-//@EnableWebMvc
-public class MoviesRentalApplication extends SpringBootServletInitializer  {
+public class MoviesRentalApplication  {
 
-	@Override
-	protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-		return application.sources(MoviesRentalApplication.class);
-	}
 
 	public static void main(String[] args) {
 
