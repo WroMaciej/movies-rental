@@ -20,6 +20,9 @@ public class Movie {
     @Column(name = "rental_rate")
     private Double rentalRate;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToMany(mappedBy = "movies")
     private Collection<Actor> actors = new ArrayList<>();
 
@@ -32,9 +35,20 @@ public class Movie {
         this.rentalRate = rentalRate;
     }
 
+
+
     public Movie(Integer id, String title) {
         this.id = id;
         this.title = title;
+
+    }
+
+    public Movie(Integer id, String title, Double rentalRate, String description, Collection<Actor> actors) {
+        this.id = id;
+        this.title = title;
+        this.rentalRate = rentalRate;
+        this.description = description;
+        this.actors = actors;
     }
 
     public Integer getId() {
@@ -69,5 +83,14 @@ public class Movie {
 
     public void setActors(Collection<Actor> actors) {
         this.actors = actors;
+    }
+
+    @JsonIgnore
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

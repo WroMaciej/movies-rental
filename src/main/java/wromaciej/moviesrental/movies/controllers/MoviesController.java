@@ -2,8 +2,10 @@ package wromaciej.moviesrental.movies.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import wromaciej.moviesrental.movies.model.Actor;
 import wromaciej.moviesrental.movies.model.Movie;
@@ -27,32 +29,45 @@ public class MoviesController {
         this.cartService = cartService;
     }
 
-    @RequestMapping(value="/{movieId}")
-    public @ResponseBody Movie findMovie(@PathVariable int movieId) {
+    @RequestMapping(value = "/{movieId}")
+    public @ResponseBody
+    Movie findMovie(@PathVariable int movieId) {
         return movieService.findMovie(movieId);
     }
 
-    @RequestMapping(value="/{movieId}/rental/{days}")
-    public @ResponseBody double findMovieRentalRateForDays(@PathVariable int movieId, @PathVariable int days) {
+    @RequestMapping(value = "/{movieId}/rental/{days}")
+    public @ResponseBody
+    double findMovieRentalRateForDays(@PathVariable int movieId, @PathVariable int days) {
         return cartService.calculateRentalRateForDays(movieId, days);
     }
 
-    @RequestMapping(value="/{movieId}/actors")
-    public @ResponseBody Collection<Actor> findActorsWithMovie(@PathVariable int movieId) {
+    @RequestMapping(value = "/{movieId}/actors")
+    public @ResponseBody
+    Collection<Actor> findActorsWithMovie(@PathVariable int movieId) {
         return movieService.findMovie(movieId).getActors();
     }
 
 
-    @RequestMapping(value="/title/{title}")
+    @RequestMapping(value = "/title/{title}")
     public @ResponseBody
     List<Movie> findMovieByTitle(@PathVariable String title) {
         return movieService.findMoviesByTitle(title);
     }
 
 
-    @RequestMapping(value="/")
-    public @ResponseBody List<Movie> findAllMovies() {
+    @RequestMapping(value = "/")
+    public @ResponseBody
+    List<Movie> findAllMovies() {
         return movieService.findAllMovies();
+    }
+
+
+    @RequestMapping(value = "/movie/{movieId}.html", method=RequestMethod.GET)
+    public
+    String showMovieInfo(@PathVariable int movieId, ModelMap model) {
+        model.put("title",movieService.findMovie(movieId).getTitle());
+        model.put("description",movieService.findMovie(movieId).getDescription());
+        return "movieinfo";
     }
 
 }
